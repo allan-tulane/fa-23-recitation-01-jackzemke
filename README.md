@@ -1,7 +1,7 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=11681059&assignment_repo_type=AssignmentRepo)
 # CMPS 2200  Recitation 01
 
-**Name (Team Member 1):**_________________________  
+**Name (Team Member 1):** Jack Zemke  
 **Name (Team Member 2):**_________________________
 
 In this recitation, we will investigate asymptotic complexity. Additionally, we will get familiar with the various technologies we'll use for collaborative coding.
@@ -39,10 +39,16 @@ We'll compare the running times of `linear_search` and `binary_search` empirical
 - [ ] 3. Write at least two additional test cases in `test_binary_search` and confirm they pass.
 
 - [ ] 4. Describe the worst case input value of `key` for `linear_search`? for `binary_search`? 
+  
+  -For both `linear_search` and `binary_search` the worst case value for `key` is a value that is not contained within the input list. This is because it would require the search algorithms to iterate through the entire list to the very end before finding the key.
 
 **TODO: your answer goes here**
 
 - [ ] 5. Describe the best case input value of `key` for `linear_search`? for `binary_search`? 
+  
+  -The best case input value for `linear search` is the smallest value in the input list. This is because `linear search` iterates through the list from the beginning, which is where the smallest value is. If the key is the smallest value in the list, it will be the first value to be evaluated and will therefore terminate in the best case time.
+
+  -The best case input value for `binary search` is the middle value in the list. This is because the algorithm splits the list down the middle and compares the pivot value to the key. If the middle (pivot) value is equal to the key, the algorithm will terminate on the very first evaluation resulting in the best case time. 
 
 **TODO: your answer goes here**
 
@@ -53,6 +59,10 @@ We'll compare the running times of `linear_search` and `binary_search` empirical
 - [ ] 8. Call `print_results(compare_search())` and paste the results here:
 
 **TODO: add your timing results here**
+
+Syntax: `(length of list, time_linear, time_binary)`
+
+`[(10.0, 0.0021457672119140625, 0.0026226043701171875), (100.0, 0.0030994415283203125, 0.004291534423828125), (1000.0, 0.031948089599609375, 0.016927719116210938), (10000.0, 0.3299713134765625, 0.1499652862548828), (100000.0, 2.9599666595458984, 1.1610984802246094), (1000000.0, 23.29087257385254, 9.055852890014648), (10000000.0, 218.2290554046631, 100.16727447509766)]`
 
 - [ ] 9. The theoretical worst-case running time of linear search is $O(n)$ and binary search is $O(log_2(n))$. Do these theoretical running times match your empirical results? Why or why not?
 
