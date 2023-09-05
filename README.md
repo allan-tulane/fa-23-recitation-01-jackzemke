@@ -79,11 +79,11 @@ We'll compare the running times of `linear_search` and `binary_search` empirical
 
   + For binary search? 
   
-    We must first sort the list, taking $\Theta(n^2)$ time, and then search it using binary search $k$ times, taking $O(k*log_2(n))$ time. The time complexity is the sum of these steps, $\Theta(n^2)+O(k*log_2(n))$. Again $n^2$ is the dominant term in this expression, because as $n\rightarrow\infty$, $O(k*log_2(n))$ grows at a logarithmic rate while $\Theta(n^2)$ grows exponentially.
+    We must first sort the list, taking $\Theta(n^2)$ time, and then search it using binary search $k$ times, taking $O(k * log_2(n))$ time. The time complexity is the sum of these steps, $\Theta(n^2)+O(k* log_2(n))$. Again $n^2$ is the dominant term in this expression, because as $n\rightarrow\infty$, $O(k*log_2(n))$ grows at a logarithmic rate while $\Theta(n^2)$ grows exponentially.
 
   + For what values of $k$ is it more efficient to first sort and then use binary search versus just using linear search without sorting? 
   
-    For this problem we will compare the time complexity of sort+binary_search with the time complexity of unsorted linear search. The time complexity of sort+binary_search is $\Theta(n^2)+O(k*log_2(n))$, and the time complexity of unsorted linear search is $O(nk)$. We are looking for a value of $k$ such that $O(nk) > (n^2)+O(k*log_2(n))$. The arithmetic is as follows:
+    For this problem we will compare the time complexity of sort+binary_search with the time complexity of unsorted linear search. The time complexity of sort+binary_search is $\Theta(n^2)+O(k* log_2(n))$, and the time complexity of unsorted linear search is $O(nk)$. We are looking for a value of $k$ such that $O(nk) > (n^2)+O(k* log_2(n))$. The arithmetic is as follows:
   
       $nk> n^2 + k*log(n)$
       
