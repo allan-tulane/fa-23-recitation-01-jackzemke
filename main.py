@@ -121,7 +121,7 @@ def compare_search(sizes=[1e1, 1e2, 1e3, 1e4, 1e5, 1e6, 1e7]):
 	###
 
 
-print(compare_search())
+# print(compare_search())
 
 def print_results(results):
 	""" done """
@@ -129,4 +129,5 @@ def print_results(results):
 							headers=['n', 'linear', 'binary'],
 							floatfmt=".3f",
 							tablefmt="github"))
-
+	
+print_results(compare_search())

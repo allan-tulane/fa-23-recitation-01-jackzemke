@@ -1,8 +1,7 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=11681059&assignment_repo_type=AssignmentRepo)
 # CMPS 2200  Recitation 01
 
-**Name (Team Member 1):** Jack Zemke  
-**Name (Team Member 2):**_________________________
+**Name (Team Member 1):** Jack Zemke, completed independently
 
 In this recitation, we will investigate asymptotic complexity. Additionally, we will get familiar with the various technologies we'll use for collaborative coding.
 
@@ -40,17 +39,13 @@ We'll compare the running times of `linear_search` and `binary_search` empirical
 
 - [ ] 4. Describe the worst case input value of `key` for `linear_search`? for `binary_search`? 
   
-  -For both `linear_search` and `binary_search` the worst case value for `key` is a value that is not contained within the input list. This is because it would require the search algorithms to iterate through the entire list to the very end before finding the key.
-
-**TODO: your answer goes here**
+  - For both `linear_search` and `binary_search` the worst case value for `key` is a value that is not contained within the input list. This is because it would require the search algorithms to evaluate every single item in the list before finally determining it is not contained within the list.
 
 - [ ] 5. Describe the best case input value of `key` for `linear_search`? for `binary_search`? 
   
-  -The best case input value for `linear search` is the smallest value in the input list. This is because `linear search` iterates through the list from the beginning, which is where the smallest value is. If the key is the smallest value in the list, it will be the first value to be evaluated and will therefore terminate in the best case time.
+    - The best case input value for `linear search` is the smallest value in the input list. This is because `linear search` iterates through the list from the beginning, which is where the smallest value is. If the key is the smallest value in the list, it will be the first value to be evaluated and will therefore terminate in the best case time.
 
-  -The best case input value for `binary search` is the middle value in the list. This is because the algorithm splits the list down the middle and compares the pivot value to the key. If the middle (pivot) value is equal to the key, the algorithm will terminate on the very first evaluation resulting in the best case time. 
-
-**TODO: your answer goes here**
+    - The best case input value for `binary search` is the middle value in the list. This is because the algorithm splits the list down the middle and compares the pivot value to the key. If the middle (pivot) value is equal to the key, the algorithm will terminate on the very first evaluation resulting in the best case time. 
 
 - [ ] 6. Complete the `time_search` function to compute the running time of a search function. Note that this is an example of a "higher order" function, since one of its parameters is another function.
 
@@ -58,17 +53,43 @@ We'll compare the running times of `linear_search` and `binary_search` empirical
 
 - [ ] 8. Call `print_results(compare_search())` and paste the results here:
 
-**TODO: add your timing results here**
 
-Syntax: `(length of list, time_linear, time_binary)`
 
-`[(10.0, 0.0021457672119140625, 0.0026226043701171875), (100.0, 0.0030994415283203125, 0.004291534423828125), (1000.0, 0.031948089599609375, 0.016927719116210938), (10000.0, 0.3299713134765625, 0.1499652862548828), (100000.0, 2.9599666595458984, 1.1610984802246094), (1000000.0, 23.29087257385254, 9.055852890014648), (10000000.0, 218.2290554046631, 100.16727447509766)]`
+    |            n |   linear |   binary |
+    |--------------|----------|----------|
+    |       10.000 |    0.001 |    0.002 |
+    |      100.000 |    0.003 |    0.015 |
+    |     1000.000 |    0.022 |    0.012 |
+    |    10000.000 |    0.233 |    0.092 |
+    |   100000.000 |    2.342 |    0.846 |
+    |  1000000.000 |   21.321 |    9.703 |
+    | 10000000.000 |  224.120 |   95.807 |
 
 - [ ] 9. The theoretical worst-case running time of linear search is $O(n)$ and binary search is $O(log_2(n))$. Do these theoretical running times match your empirical results? Why or why not?
+
+    - Yes, these theoretical running times do match my empirical results. The math tells us that binary search should be faster for larger arrays, and as $n \rightarrow \infty$ the difference in speeds should grow greater. My empirical results followed this trend. 
+    There was a slight deviation, where $n\le 100$, but this is to be expected. For relatively small lists, linear search is faster because it does not require the splitting of the list, which can be time/memory intensive.
 
 **TODO: your answer goes here**
 
 - [ ] 10. Binary search assumes the input list is already sorted. Assume it takes $\Theta(n^2)$ time to sort a list of length $n$. Suppose you know ahead of time that you will search the same list $k$ times. 
-  + What is worst-case complexity of searching a list of $n$ elements $k$ times using linear search? **TODO: your answer goes here**
-  + For binary search? **TODO: your answer goes here**
-  + For what values of $k$ is it more efficient to first sort and then use binary search versus just using linear search without sorting? **TODO: your answer goes here**
+  + What is worst-case complexity of searching a list of $n$ elements $k$ times using linear search? 
+  
+    We must first sort the list, taking $\Theta(n^2)$ time, and then search it using linear search $k$ times taking $O(nk)$ time. The time complexity is the sum of these steps, $\Theta(n^2)+O(nk)$. $n^2$ is the dominant term in this expression, because as $n\rightarrow\infty$, $O(nk)$ grows at a linear rate while $\Theta(n^2)$ grows exponentially.
+
+  + For binary search? 
+  
+    We must first sort the list, taking $\Theta(n^2)$ time, and then search it using binary search $k$ times, taking $O(k*log_2(n))$ time. The time complexity is the sum of these steps, $\Theta(n^2)+O(k*log_2(n))$. Again $n^2$ is the dominant term in this expression, because as $n\rightarrow\infty$, $O(k*log_2(n))$ grows at a logarithmic rate while $\Theta(n^2)$ grows exponentially.
+
+  + For what values of $k$ is it more efficient to first sort and then use binary search versus just using linear search without sorting? 
+  
+    For this problem we will compare the time complexity of sort+binary_search with the time complexity of unsorted linear search. The time complexity of sort+binary_search is $\Theta(n^2)+O(k*log_2(n))$, and the time complexity of unsorted linear search is $O(nk)$. We are looking for a value of $k$ such that $O(nk) > (n^2)+O(k*log_2(n))$. The arithmetic is as follows:
+  
+      $nk> n^2 + k*log(n)$
+      
+      We will consider cases where n is very large, leading us to only consider terms that scale as n becomes very large. Thus our inequality becomes $nk> n^2$. 
+
+      Dividing both sides by $n$, we obtain the inequality of $k>n$. 
+
+      Thus, when dealing with lists with less elements $n$ than the number of searches $k$ you expect to do, it is more effecient to first sort the list and then execute the binary search $k$ times. When dealing with lists with more elements $n$ than the number of searches $k$ you expect to do, it is more effecient perform $k$ searches on an unsorted list using linear_search. 
+  
